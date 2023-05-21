@@ -11,8 +11,12 @@ const Dashboard = () => {
  
   return (
     <>
-      <div>Dashboard</div>
-      <h1>{userName}</h1>
+    <div>
+     {userName}
+     <h2>Dashboard</h2>
+
+    </div>
+     
     </>
   )
 }
