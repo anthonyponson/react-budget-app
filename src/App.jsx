@@ -4,6 +4,7 @@ import Dashboard, { dashboardLoader } from './pages/Dashboard'
 
 import Error from './pages/Error'
 import Main, { mainLoader } from './layout/Main'
+import { logoutAction } from '../src/actions/logout'
 
 const router = createBrowserRouter([
   {
@@ -13,14 +14,17 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       {
-      index:true,
-      element: <Dashboard />,
-      loader: dashboardLoader,
-      errorElement: <Error />,
-    }
-  ]
-    ,
-  }
+        index: true,
+        element: <Dashboard />,
+        loader: dashboardLoader,
+        errorElement: <Error />,
+      },
+      {
+        path: 'logout',
+        action: logoutAction,
+      },
+    ],
+  },
 ])
 
 function App() {

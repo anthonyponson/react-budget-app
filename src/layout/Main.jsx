@@ -4,6 +4,7 @@ import { fetchData } from '../helper'
 import wave from '../assets/wave.svg'
 import Nav from '../components/Nav'
 
+
 export function mainLoader() {
   const userName = fetchData('userName')
   return { userName }
