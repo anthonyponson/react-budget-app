@@ -39,3 +39,18 @@ const Nav = ({ userName }) => {
 }
 
 export default Nav
+
+
+{/* <Form
+  method="post"
+  action="/logout"
+  onSubmit={(event) => {
+    event.preventDefault();
+    if (window.confirm('Are you sure you want to delete all data and log out?')) {
+     
+      window.location.href = '/logout';
+    }
+  }}
+>
+ 
+</Form> */}

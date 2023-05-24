@@ -9,6 +9,9 @@ export default {
       colors: {
         reddishgray:"#f3eeee",
 
+      },
+      screens:{
+        xmd:"850px"
       }
     },
   },
