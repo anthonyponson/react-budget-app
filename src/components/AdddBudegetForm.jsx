@@ -1,7 +1,18 @@
-import { Form } from 'react-router-dom'
+import { Form, useFetcher } from 'react-router-dom'
 import { HiCurrencyDollar } from 'react-icons/hi'
+import { useEffect, useRef } from 'react'
 
 const AddBudgetForm = () => {
+  const fetcher = useFetcher()
+  const isSubmitting = fetcher.state === 'submitting'
+  const ref = useRef()
+
+  useEffect(() => {
+    if (!isSubmitting) {
+      ref.current.reset()
+    }
+  }, [isSubmitting])
+
   return (
     <>
       <div
@@ -9,7 +20,11 @@ const AddBudgetForm = () => {
        border-teal-300 rounded-lg p-6 max-w-3xl'
       >
         <h2 className='text-xl font-bold'> Create Budget</h2>
-        <Form method='post' className='flex flex-col space-y-4'>
+        <fetcher.Form
+          ref={ref}
+          method='post'
+          className='flex flex-col space-y-4'
+        >
           <div className='flex flex-col space-y-2 mt-4'>
             <label className='text-lg font-medium' htmlFor='newBudget'>
               Budget Name
@@ -38,11 +53,23 @@ const AddBudgetForm = () => {
               inputMode='decimal'
             />
           </div>
-          <button className='bg-teal-400 max-w-[150px] rounded-md p-2 text-white'>
-            <HiCurrencyDollar className='' />
-            <span>Add Budget</span>
+          <input type='hidden' name='_action' value='createBudget' />
+          <button
+            disabled={isSubmitting}
+            className='bg-teal-400 max-w-[150px] rounded-md p-2 text-white flex items-center justify-center'
+          >
+            {isSubmitting ? (
+              'Adding...'
+            ) : (
+              <>
+                <div className='flex items-center space-x-2'>
+                  <span>Add budget </span>
+                  <HiCurrencyDollar />
+                </div>
+              </>
+            )}
           </button>
-        </Form>
+        </fetcher.Form>
       </div>
     </>
   )

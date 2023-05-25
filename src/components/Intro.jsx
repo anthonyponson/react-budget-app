@@ -17,7 +17,7 @@ const Intro = () => {
             expedita harum commodi corrupti optio? Dolores et laudantium laborum
             saepe consequuntur
           </p>
-          <Form method='post'>
+          <Form method='post' className='flex flex-col'>
             <input
               className='border-2 border-teal-400 px-2 py-2 rounded-md focus:outline-none'
               type='text'
@@ -25,13 +25,15 @@ const Intro = () => {
               placeholder='Whats your name'
               required
             />
+            <input type="hidden" name="_action" value="newUser" />
+
+            <button
+              type='submit'
+              className='bg-teal-400 text-white text-base px-3 py-2 mt-3 rounded-md max-w-[40%]'
+            >
+              Create Account
+            </button>
           </Form>
-          <button
-            type='submit'
-            className='bg-teal-400 text-white text-base px-3 py-2 mt-3 rounded-md'
-          >
-            Create Account
-          </button>
         </div>
         {/* container 2 */}
         <div className=''>

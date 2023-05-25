@@ -14,13 +14,13 @@ const Error = () => {
         <div className='flex justify-center gap-5 mt-8'>
           <button
             onClick={() => navigate(-1)}
-            class='flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded'
+            className='flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded'
           >
             <FaArrowLeft />
             <span>Go Back</span>
           </button>
 
-          <Link class='flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded'>
+          <Link className='flex items-center space-x-2 px-4 py-2 bg-blue-500 text-white rounded'>
             <HiHome />
             <span>Go Home</span>
           </Link>
