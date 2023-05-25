@@ -40,8 +40,8 @@ const Nav = ({ userName }) => {
 
 export default Nav
 
-
-{/* <Form
+{
+  /* <Form
   method="post"
   action="/logout"
   onSubmit={(event) => {
@@ -53,4 +53,5 @@ export default Nav
   }}
 >
  
-</Form> */}
+</Form> */
+}
