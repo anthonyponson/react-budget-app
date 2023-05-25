@@ -3,15 +3,15 @@ import { createBudget, fetchData, wait } from '../helper'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddBudgetForm from '../components/AdddBudegetForm'
+import AddExpenseForm from '../components/AddExpenseForm'
 
 export function dashboardLoader() {
   const userName = fetchData('userName')
-  const budgets = fetchData('budgets')
-  return { userName, budgets }
+  const budget = fetchData('budget')
+  return { userName, budget }
 }
 
 export async function dashboardAction({ request }) {
-
   await wait()
 
   const data = await request.formData()
@@ -30,7 +30,7 @@ export async function dashboardAction({ request }) {
     try {
       createBudget({
         name: values.newBudget,
-        amount: values.newBudgetAmount
+        amount: values.newBudgetAmount,
       })
       return toast.success(`budget created successfully`)
     } catch (e) {
@@ -40,7 +40,7 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-  const { userName, budgets } = useLoaderData()
+  const { userName, budget } = useLoaderData()
 
   return (
     <>
@@ -50,12 +50,22 @@ const Dashboard = () => {
             Welcome Back, <span className='text-teal-400'>{userName}</span>
           </h1>
           <div className=''>
-            {/* {budgets ? () : ()} */}
-            <div>
+            {budget && budget.length > 0 ? (
               <div>
-                <AddBudgetForm />
+                <div>
+                  <AddBudgetForm />
+                  <AddExpenseForm budget={budget} />
+                </div>
               </div>
-            </div>
+            ) : (
+              <>
+                <div className=''>
+                  <p>personal budgeting is the secreat to finalcial freedom</p>
+                  <p>create a budget to get started</p>
+                  <AddBudgetForm />
+                </div>
+              </>
+            )}
           </div>
         </div>
       ) : (
