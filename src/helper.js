@@ -29,3 +29,20 @@ export const createBudget = ({ name, amount }) => {
     JSON.stringify([...existingBudget, newItem])
   )
 }
+
+export const createExpense = ({ name, amount, budgetId }) => {
+  const newItem = {
+    id: Date.now().toString(),
+    name: name,
+    createdAt: Date.now(),
+    amount: +amount,
+    budgetId: budgetId
+  }
+  const existingExpense = fetchData('expense') ?? []
+
+  return localStorage.setItem(
+    'expense',
+    JSON.stringify([...existingExpense, newItem])
+  )
+}
+
