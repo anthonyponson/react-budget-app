@@ -4,6 +4,7 @@ import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddBudgetForm from '../components/AdddBudegetForm'
 import AddExpenseForm from '../components/AddExpenseForm'
+import BudgetItem from '../components/BudgetItem'
 
 export function dashboardLoader() {
   const userName = fetchData('userName')
@@ -40,15 +41,16 @@ export async function dashboardAction({ request }) {
 
   if (_action === 'createExpense') {
     try {
-      createExpense( {name: values.newExpense,
-      amount: values.newExpenseAmount,
-    budgetId: values.newExpenseBudget})
+      createExpense({
+        name: values.newExpense,
+        amount: values.newExpenseAmount,
+        budgetId: values.newExpenseBudget,
+      })
       return toast.success(`Expense ${values.newExpense} created`)
     } catch (e) {
       throw new Error('there was a problem creating your budget')
     }
   }
-
 }
 
 const Dashboard = () => {
@@ -61,12 +63,18 @@ const Dashboard = () => {
           <h1 className='text-4xl font-bold'>
             Welcome Back, <span className='text-teal-400'>{userName}</span>
           </h1>
-          <div className=''>
+          <div className='flex flex-col'>
             {budget && budget.length > 0 ? (
-              <div>
-                <div>
+              <div className=''>
+                <div className=''>
                   <AddBudgetForm />
                   <AddExpenseForm budget={budget} />
+                  <h2 className='text-2xl font-bold'>Existing Budgets</h2>
+                  <div className='flex'>
+                    {budget.map((budget) => (
+                      <BudgetItem key={budget.id} budget={budget} />
+                    ))}
+                  </div>
                 </div>
               </div>
             ) : (
