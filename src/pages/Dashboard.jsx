@@ -69,8 +69,8 @@ const Dashboard = () => {
                 <div className=''>
                   <AddBudgetForm />
                   <AddExpenseForm budget={budget} />
-                  <h2 className='text-2xl font-bold'>Existing Budgets</h2>
-                  <div className='flex'>
+                  <h2 className='text-2xl font-bold mt-5'>Existing Budgets</h2>
+                  <div className='flex flex-col w-full md:flex-row md:space-x-5'>
                     {budget.map((budget) => (
                       <BudgetItem key={budget.id} budget={budget} />
                     ))}

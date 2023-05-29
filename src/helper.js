@@ -46,3 +46,22 @@ export const createExpense = ({ name, amount, budgetId }) => {
   )
 }
 
+export const calulateSpentByBudget = (budgetId) => {
+  const expenses = fetchData('expense') ?? [];
+  const budgetSepnt = expenses.reduce()
+
+}
+
+// formatting
+
+
+
+// formating curency
+
+export const formartCurrency = (amt)=> {
+  return amt.toLocaleString(undefined, {
+    style: "currency",
+    currency:"USD",
+
+  })
+}
