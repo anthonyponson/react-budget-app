@@ -2,7 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  transition: all 1s ease-in-out;
+}
 
+progress{
+  -webkit-transition: all 1s cubic-bezier(0.075, 0.82, 0.165 , 1) ;
+  -o-transition: all 1s cubic-bezier(0.075, 0.82, 0.165 , 1) ;
+  transition: all 1s cubic-bezier(0.075, 0.82, 0.165 , 1) ;
+}
 progress::-webkit-progress-bar {
     background-color: #dfdfdf;
   }

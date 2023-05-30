@@ -58,9 +58,9 @@ const AddExpenseForm = ({ budget }) => {
               <input
                 className='max-w-md border-2 border-teal-400 px-4 py-1 rounded-md focus:outline-none'
                 type='number'
-                name='newBudgetAmount'
+                name='newExpenseAmount'
                 step='0.01'
-                id='newBudget'
+                id='newExpenseAmount'
                 placeholder='eg . $100'
                 required
                 inputMode='decimal'

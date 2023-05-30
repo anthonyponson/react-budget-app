@@ -5,11 +5,13 @@ import { toast } from 'react-toastify'
 import AddBudgetForm from '../components/AdddBudegetForm'
 import AddExpenseForm from '../components/AddExpenseForm'
 import BudgetItem from '../components/BudgetItem'
+import Table from '../components/Table'
 
 export function dashboardLoader() {
   const userName = fetchData('userName')
   const budget = fetchData('budget')
-  return { userName, budget }
+  const expense  = fetchData('expense')
+  return { userName, budget , expense }
 }
 
 export async function dashboardAction({ request }) {
@@ -54,7 +56,7 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-  const { userName, budget } = useLoaderData()
+  const { userName, budget ,expense } = useLoaderData()
 
   return (
     <>
@@ -70,11 +72,18 @@ const Dashboard = () => {
                   <AddBudgetForm />
                   <AddExpenseForm budget={budget} />
                   <h2 className='text-2xl font-bold mt-5'>Existing Budgets</h2>
-                  <div className='flex flex-col w-full md:flex-row md:space-x-5'>
+                  <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
                     {budget.map((budget) => (
                       <BudgetItem key={budget.id} budget={budget} />
                     ))}
                   </div>
+                  {expense && expense.length > 0 && (
+                    <div className="grid">
+                      <h2 className='text-2xl'>Recent Expense</h2>
+                      {/* <Table expense={expense.sort((a,b) => b.createdAt - a.createdAt)} /> */}
+                    <Table expense={expense} />
+                    </div>
+                  ) }
                 </div>
               </div>
             ) : (

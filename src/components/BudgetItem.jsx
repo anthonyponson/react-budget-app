@@ -1,8 +1,9 @@
 import { useState } from 'react'
-import { formartCurrency } from '../helper'
+import { calulateSpentByBudget, formartCurrency } from '../helper'
 
 const BudgetItem = ({ budget }) => {
   const { name, id, amount, color } = budget
+  const spent = calulateSpentByBudget(id)
   return (
     <>
       <div
@@ -17,14 +18,14 @@ const BudgetItem = ({ budget }) => {
         </div>
 
         <progress
-          className='appearance-none border-none h-6 w-full rounded-[100vmax] overflow-hidden transition'
+          className='appearance-none border-none h-6 w-full rounded-[100vmax] overflow-hidden '
           max={amount}
-          value='100'
+          value={spent}
         ></progress>
 
         <div className='progress-text flex justify-between'>
-          <small>...Spend</small>
-          <small>...Remaining</small>
+          <small>{formartCurrency(spent)}Spend</small>
+          <small>{formartCurrency(amount - spent)}</small>
         </div>
       </div>
     </>

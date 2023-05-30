@@ -30,7 +30,7 @@ export const createBudget = ({ name, amount }) => {
   )
 }
 
-export const createExpense = ({ name, amount, budgetId }) => {
+export const createExpense = ({ name, amount, budgetId }) =>  {
   const newItem = {
     id: Date.now().toString(),
     name: name,
@@ -48,8 +48,13 @@ export const createExpense = ({ name, amount, budgetId }) => {
 
 export const calulateSpentByBudget = (budgetId) => {
   const expenses = fetchData('expense') ?? [];
-  const budgetSepnt = expenses.reduce()
-
+  const budgetSepnt = expenses.reduce((acc, expense) => {
+    // check if expense.Id is equal to budget.id i passed in 
+    if(expense.budgetId !== budgetId) return acc
+    // add current amount to my total
+    return acc += expense.amount
+  },0)
+return budgetSepnt
 }
 
 // formatting
