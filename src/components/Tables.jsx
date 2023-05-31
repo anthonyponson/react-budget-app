@@ -1,6 +1,7 @@
 import ExpenseItem from './ExpenseItem'
 
-const Table = ({ expense }) => {
+const Tables = ({ expense }) => {
+  console.log(expense)
   return (
     <>
       <div className=''>
@@ -13,12 +14,9 @@ const Table = ({ expense }) => {
             </tr>
           </thead>
           <tbody>
-            {expense.map((item) => {
-              ;<tr key={item.id}>
-                {item.name}
-                <ExpenseItem />
-              </tr>
-            })}
+            {expense.map((item) => (
+              <tr key={item.id}>{item.name}</tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -26,4 +24,4 @@ const Table = ({ expense }) => {
   )
 }
 
-export default Table
+export default Tables

@@ -5,7 +5,7 @@ import { toast } from 'react-toastify'
 import AddBudgetForm from '../components/AdddBudegetForm'
 import AddExpenseForm from '../components/AddExpenseForm'
 import BudgetItem from '../components/BudgetItem'
-import Table from '../components/Table'
+import Tables from '../components/Tables'
 
 export function dashboardLoader() {
   const userName = fetchData('userName')
@@ -81,7 +81,7 @@ const Dashboard = () => {
                     <div className="grid">
                       <h2 className='text-2xl'>Recent Expense</h2>
                       {/* <Table expense={expense.sort((a,b) => b.createdAt - a.createdAt)} /> */}
-                    <Table expense={expense} />
+                    <Tables expense={expense}/>
                     </div>
                   ) }
                 </div>
