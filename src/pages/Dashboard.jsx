@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom'
+import { Link, useLoaderData } from 'react-router-dom'
 import { createBudget, createExpense, fetchData, wait } from '../helper'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
@@ -10,8 +10,8 @@ import Tables from '../components/Tables'
 export function dashboardLoader() {
   const userName = fetchData('userName')
   const budget = fetchData('budget')
-  const expense  = fetchData('expense')
-  return { userName, budget , expense }
+  const expense = fetchData('expense')
+  return { userName, budget, expense }
 }
 
 export async function dashboardAction({ request }) {
@@ -56,7 +56,7 @@ export async function dashboardAction({ request }) {
 }
 
 const Dashboard = () => {
-  const { userName, budget ,expense } = useLoaderData()
+  const { userName, budget, expense } = useLoaderData()
 
   return (
     <>
@@ -78,12 +78,23 @@ const Dashboard = () => {
                     ))}
                   </div>
                   {expense && expense.length > 0 && (
-                    <div className="grid">
+                    <div className='pb-10'>
                       <h2 className='text-2xl'>Recent Expense</h2>
-                      {/* <Table expense={expense.sort((a,b) => b.createdAt - a.createdAt)} /> */}
-                    <Tables expense={expense}/>
+                      <Tables
+                        expense={expense
+                          .sort((a, b) => b.createdAt - a.createdAt)
+                          .slice(0, 7)}
+                      />
+                      {expense.length > 7 && (
+                        <Link
+                          to='expense'
+                          className='bg-teal-300 px-4 py-2 rounded-sm'
+                        >
+                          View all expense
+                        </Link>
+                      )}
                     </div>
-                  ) }
+                  )}
                 </div>
               </div>
             ) : (

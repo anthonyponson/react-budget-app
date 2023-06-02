@@ -1,10 +1,13 @@
+import { formartCurrency, formatDateToLocaleString } from '../helper'
 
-const ExpenseItem = () => {
+const ExpenseItem = ({ expense }) => {
   return (
     <>
-      <div>jbfjkbjfbj</div>
+      <td>{expense.name}</td>
+      <td> {formartCurrency(expense.amount)}</td>
+      <td>{formatDateToLocaleString(expense.createdAt)}</td>
     </>
-  );
+  )
 }
 
-export default ExpenseItem;
+export default ExpenseItem

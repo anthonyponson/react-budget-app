@@ -11,7 +11,10 @@ export default {
 
       },
       screens:{
-        xmd:"850px"
+        xmd:"850px",
+        sm1: "400px",
+        sm2: "600px",
+        sm3: "800px",
       }
     },
   },

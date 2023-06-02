@@ -4,9 +4,9 @@ const Tables = ({ expense }) => {
   console.log(expense)
   return (
     <>
-      <div className=''>
-        <table>
-          <thead>
+      <div className='overflow-x-auto'>
+        <table className='mt-4 w-full'>
+          <thead className=''>
             <tr>
               {['name', 'amount', 'date'].map((item, index) => (
                 <th key={index}>{item}</th>
@@ -14,8 +14,10 @@ const Tables = ({ expense }) => {
             </tr>
           </thead>
           <tbody>
-            {expense.map((item) => (
-              <tr key={item.id}>{item.name}</tr>
+            {expense.map((expense) => (
+              <tr className='mt-3 text-center' key={expense.id}>
+                <ExpenseItem expense={expense} />
+              </tr>
             ))}
           </tbody>
         </table>
