@@ -83,17 +83,18 @@ const Dashboard = () => {
                       <Tables
                         expense={expense
                           .sort((a, b) => b.createdAt - a.createdAt)
-                          .slice(0, 7)}
+                          .slice(-0, 7)}
                       />
-                      {expense.length > 7 && (
-                        <Link
-                          to='expense'
-                          className='bg-teal-300 px-4 py-2 rounded-sm'
-                        >
-                          View all expense
-                        </Link>
-                      )}
                     </div>
+                  )}
+
+                  {expense.length > 7 && (
+                    <Link
+                      to='expense'
+                      className='bg-teal-300 px-4 py-2 rounded-sm mt-7'
+                    >
+                      View all expense
+                    </Link>
                   )}
                 </div>
               </div>
