@@ -1,5 +1,11 @@
 import { Link, useLoaderData } from 'react-router-dom'
-import { createBudget, createExpense, fetchData, wait } from '../helper'
+import {
+  createBudget,
+  createExpense,
+  deleteItem,
+  fetchData,
+  wait,
+} from '../helper'
 import Intro from '../components/Intro'
 import { toast } from 'react-toastify'
 import AddBudgetForm from '../components/AdddBudegetForm'
@@ -15,10 +21,13 @@ export function dashboardLoader() {
 }
 
 export async function dashboardAction({ request }) {
+  
   await wait()
 
   const data = await request.formData()
   const { _action, ...values } = Object.fromEntries(data)
+
+// create new user
 
   if (_action === 'newUser') {
     try {
@@ -28,6 +37,7 @@ export async function dashboardAction({ request }) {
       throw new Error('there was a problem creating your account')
     }
   }
+// create budget
 
   if (_action === 'createBudget') {
     try {
@@ -41,6 +51,8 @@ export async function dashboardAction({ request }) {
     }
   }
 
+  // create expense 
+
   if (_action === 'createExpense') {
     try {
       createExpense({
@@ -53,6 +65,34 @@ export async function dashboardAction({ request }) {
       throw new Error('there was a problem creating your budget')
     }
   }
+
+  // delete expense
+
+  if (_action === 'deleteExpense') {
+    try {
+      deleteItem({
+        key: 'expense',
+        id: values.expenseId,
+      })
+      return toast.success(`Expense ${values.newExpense} deleted`)
+    } catch (e) {
+      throw new Error('there was a problem deleting your expense ')
+    }
+  }
+
+  // delete budget
+  
+  // if (_action === 'deleteBudget') {
+  //   try {
+  //     deleteBudget({
+  //       key: 'budget',
+  //       id: values.budgetId,
+  //     })
+  //     return toast.success(`Expense ${values.newBudget} deleted`)
+  //   } catch (e) {
+  //     throw new Error('there was a problem deleting your expense ')
+  //   }
+  // }
 }
 
 const Dashboard = () => {
@@ -78,23 +118,26 @@ const Dashboard = () => {
                     ))}
                   </div>
                   {expense && expense.length > 0 && (
-                    <div className='pb-10'>
-                      <h2 className='text-2xl'>Recent Expense</h2>
-                      <Tables
-                        expense={expense
-                          .sort((a, b) => b.createdAt - a.createdAt)
-                          .slice(-0, 7)}
-                      />
-                    </div>
-                  )}
-
-                  {expense.length > 7 && (
-                    <Link
-                      to='expense'
-                      className='bg-teal-300 px-4 py-2 rounded-sm mt-7'
-                    >
-                      View all expense
-                    </Link>
+                    <>
+                      <div className='pb-10'>
+                        <h2 className='text-2xl'>Recent Expense</h2>
+                        <Tables
+                          expense={expense
+                            .sort((a, b) => b.createdAt - a.createdAt)
+                            .slice(-0, 7)}
+                        />
+                      </div>
+                      <div>
+                        {expense.length > 7 && (
+                          <Link
+                            to='expense'
+                            className='bg-teal-300 px-4 py-2 rounded-sm mt-7'
+                          >
+                            View all expense
+                          </Link>
+                        )}
+                      </div>
+                    </>
                   )}
                 </div>
               </div>
