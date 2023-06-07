@@ -36,7 +36,6 @@ export const createBudget = ({ name, amount }) => {
     name: name,
     createdAt: Date.now(),
     amount: +amount,
-    color: generateRandomColor(),
   }
 
   const existingBudget = fetchData('budget') ?? []

@@ -3,7 +3,7 @@ import { calulateSpentByBudget, formartCurrency } from '../helper'
 import { useFetcher } from 'react-router-dom'
 
 const BudgetItem = ({ budget }) => {
-  const { name, id, amount, color } = budget
+  const { name, id, amount } = budget
   const spent = calulateSpentByBudget(id)
   // const fetcher = useFetcher()
   return (

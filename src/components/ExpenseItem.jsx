@@ -25,7 +25,6 @@ const ExpenseItem = ({ expense }) => {
       <td>
         <Link
           style={{
-            backgroundColor: budget.color,
             padding: '1px 5px',
             borderRadius: '10px',
           }}
