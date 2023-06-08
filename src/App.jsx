@@ -14,7 +14,8 @@ import { logoutAction } from '../src/actions/logout'
 
 
 import ExpensePage, { expenseAction, expenseLoader } from './pages/ExpensePage'
-import BudgetPage, { BudgetLoader } from './pages/BudgetPage'
+
+import BudgetPage, { budgetAction, BudgetLoader } from './pages/BudgetPage'
 
 
 const router = createBrowserRouter([
@@ -30,18 +31,21 @@ const router = createBrowserRouter([
         loader: dashboardLoader,
         errorElement: <Error />,
         action: dashboardAction,
+        errorElement: <Error />,
       },
       {
         path: 'expense',
         element: <ExpensePage />,
         loader: expenseLoader,
         action: expenseAction,
+        errorElement: <Error />,
       },
       {
         path: 'budget/:id',
         element: <BudgetPage />,
         loader: BudgetLoader,
-        // action: Action,
+        action: budgetAction,
+
       },
       {
         path: 'logout',

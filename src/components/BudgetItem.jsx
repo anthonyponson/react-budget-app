@@ -1,8 +1,9 @@
 import { HiTrash } from 'react-icons/hi'
 import { calulateSpentByBudget, formartCurrency } from '../helper'
-import { useFetcher } from 'react-router-dom'
+import { Form, Link, useFetcher } from 'react-router-dom'
+import { FaMoneyBill } from 'react-icons/fa'
 
-const BudgetItem = ({ budget }) => {
+const BudgetItem = ({ budget, showDelete = false }) => {
   const { name, id, amount } = budget
   const spent = calulateSpentByBudget(id)
   // const fetcher = useFetcher()
@@ -37,6 +38,32 @@ const BudgetItem = ({ budget }) => {
           <small>{formartCurrency(spent)}Spend</small>
           <small>{formartCurrency(amount - spent)}</small>
         </div>
+
+        {showDelete ? (
+          <Form method='post' action='delete' onSubmit={(event) => {
+            if(!confirm('are you sure you wnat to permenently delete this budget?'))
+            {
+              event.preventDefault()
+            }
+          }}>
+
+            <button type='submit'>
+            <div className="flex items-center space-x-2 bg-teal-400 px-2 py-1 rounded">
+            <span className='text-lg text-white'>Delete Budget</span>
+            <HiTrash className='text-xl text-white'/>
+            </div>
+            </button>
+            
+          </Form>
+        ) : (
+          <Link className='flex items-center space-x-3 ' to={`/budget/${id}`}>
+            <div className="flex items-center space-x-4 bg-teal-400 px-3 py-1 rounded">
+            <span className='text-xl text-white'>view detail</span>
+            <FaMoneyBill className='text-2xl text-white'/>
+            </div>
+            
+          </Link>
+        )}
       </div>
     </>
   )

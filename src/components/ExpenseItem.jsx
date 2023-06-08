@@ -8,7 +8,7 @@ import {
   getAllMatchingItems,
 } from '../helper'
 
-const ExpenseItem = ({ expense }) => {
+const ExpenseItem = ({ expense, showBudget }) => {
   const fetcher = useFetcher()
 
   const budget = getAllMatchingItems({
@@ -22,17 +22,21 @@ const ExpenseItem = ({ expense }) => {
       <td>{expense.name}</td>
       <td> {formartCurrency(expense.amount)}</td>
       <td>{formatDateToLocaleString(expense.createdAt)}</td>
-      <td>
-        <Link
-          style={{
-            padding: '1px 5px',
-            borderRadius: '10px',
-          }}
-          to={`/budget/${budget.id}`}
-        >
-          {budget.name}
-        </Link>
-      </td>
+
+      {showBudget && (
+        <td>
+          <Link
+            className='bg-teal-400'
+            style={{
+              padding: '1px 5px',
+              borderRadius: '10px',
+            }}
+            to={`/budget/${budget.id}`}
+          >
+            {budget.name}
+          </Link>
+        </td>
+      )}
 
       <td>
         <fetcher.Form method='post'>

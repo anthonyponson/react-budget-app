@@ -7,6 +7,7 @@ export async function expenseLoader() {
   const expense = fetchData('expense')
   return { expense }
 }
+
 export async function expenseAction({request}) {
 
   const data = await request.formData()

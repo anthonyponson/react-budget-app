@@ -1,7 +1,7 @@
 import ExpenseItem from './ExpenseItem'
 import { RiDeleteBin5Line } from 'react-icons/ri'
 
-const Tables = ({ expense }) => {
+const Tables = ({ expense, showBudget = true }) => {
   console.log(expense)
   return (
     <>
@@ -9,15 +9,17 @@ const Tables = ({ expense }) => {
         <table className='mt-4   w-full'>
           <thead className=''>
             <tr>
-              {['name', 'amount', 'date', 'budgets'].map((item, index) => (
-                <th key={index}>{item}</th>
-              ))}
+              {['name', 'amount', 'date', showBudget ? 'budget' : '', ''].map(
+                (item, index) => (
+                  <th key={index}>{item}</th>
+                )
+              )}
             </tr>
           </thead>
           <tbody className=''>
             {expense.map((expense) => (
               <tr className='text-center' key={expense.id}>
-                <ExpenseItem expense={expense} />
+                <ExpenseItem expense={expense} showBudget={showBudget} />
               </tr>
             ))}
           </tbody>
