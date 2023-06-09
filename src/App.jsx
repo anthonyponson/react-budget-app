@@ -12,11 +12,11 @@ import Main, { mainLoader } from './layout/Main'
 
 import { logoutAction } from '../src/actions/logout'
 
+import { deleteBudget } from './actions/deleteBudget'
 
 import ExpensePage, { expenseAction, expenseLoader } from './pages/ExpensePage'
 
 import BudgetPage, { budgetAction, BudgetLoader } from './pages/BudgetPage'
-
 
 const router = createBrowserRouter([
   {
@@ -45,7 +45,12 @@ const router = createBrowserRouter([
         element: <BudgetPage />,
         loader: BudgetLoader,
         action: budgetAction,
-
+        children: [
+          {
+            path: 'delete',
+            action: deleteBudget,
+          },
+        ],
       },
       {
         path: 'logout',
